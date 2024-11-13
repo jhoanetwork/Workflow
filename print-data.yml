@@ -1,0 +1,21 @@
+name: Print Data on File Change
+
+on:
+  push:
+    paths:
+      - "file.txt"  # Ejecuta el workflow solo si se modifica file.txt
+
+jobs:
+  print_data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Print Specific Data
+        run: |
+          echo "Archivo modificado: file.txt"
+          echo "Fecha y hora: $(date)"
+          echo "Autor del commit: ${{ github.actor }}"
+          echo "Mensaje del commit: ${{ github.event.head_commit.message }}"
